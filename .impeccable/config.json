@@ -1,0 +1,26 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "plus jakarta sans",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-09T08:44:12.677Z",
+        "reason": "Matches the font already live in production on practice.waielts.com, verified via DevTools computed styles on 2026-10-09, required for brand consistency across the two WA IELTS surfaces"
+      },
+      {
+        "rule": "ai-color-palette",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-09T08:44:18.954Z",
+        "reason": "Matches the brand violet #6c18cc already live in production on practice.waielts.com, verified via DevTools computed styles on 2026-10-09, not an arbitrary AI aesthetic pick"
+      }
+    ]
+  }
+}
