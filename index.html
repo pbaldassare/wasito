@@ -129,7 +129,6 @@
       line-height: 1.08; letter-spacing: -0.03em; font-weight: 800;
       margin: 0 0 1.25rem;
     }
-    .hero h1 .accent { color: var(--violet); }
     .hero p.lead {
       font-size: 1.18rem; color: var(--muted); max-width: 38rem; margin: 0 0 2rem;
     }
@@ -147,12 +146,22 @@
       background: linear-gradient(135deg, var(--violet-deep) 0%, var(--violet-dark) 55%, var(--violet) 100%);
       color: #fff; padding: 4rem 0;
     }
-    .transform h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); font-weight: 800; letter-spacing: -0.02em; max-width: 34rem; margin: 0 0 2.25rem; }
-    .flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
-    @media (max-width: 860px) { .flow { grid-template-columns: repeat(2, 1fr); } }
-    .flow-step { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); border-radius: 20px; padding: 1.4rem; }
-    .flow-step .num { display: inline-flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; border-radius: 50%; background: #fff; color: var(--violet-deep); font-weight: 800; font-size: 0.9rem; margin-bottom: 0.9rem; }
-    .flow-step p { margin: 0; font-weight: 600; font-size: 1rem; }
+    .transform h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); font-weight: 800; letter-spacing: -0.02em; max-width: 34rem; margin: 0 0 3.5rem; }
+
+    /* IELTS band-score scale: a product-specific device replacing a generic numbered flow */
+    .band { max-width: 34rem; }
+    .band-row { position: relative; margin: 4rem 0 7rem; }
+    .band-track { height: 3px; background: rgba(255,255,255,0.22); border-radius: 2px; position: relative; }
+    .band-segment { position: absolute; top: 0; height: 3px; border-radius: 2px; background: #fff; }
+    .band-pin { position: absolute; top: 0; display: flex; flex-direction: column; align-items: center; transform: translateX(-50%); width: 9rem; }
+    .band-pin .dot { width: 13px; height: 13px; border-radius: 50%; flex-shrink: 0; }
+    .band-pin .value { font-weight: 800; font-size: 1.15rem; }
+    .band-pin .caption { font-size: 0.78rem; opacity: 0.75; text-align: center; line-height: 1.3; }
+    .band-pin.start { bottom: 100%; margin-bottom: 0.6rem; }
+    .band-pin.start .dot { order: 3; margin-top: 0.5rem; background: rgba(255,255,255,0.55); }
+    .band-pin.target { top: 100%; margin-top: 0.6rem; }
+    .band-pin.target .dot { margin-bottom: 0.5rem; background: #fff; box-shadow: 0 0 0 4px rgba(255,255,255,0.22); }
+    .band-numbers { display: flex; justify-content: space-between; font-size: 0.78rem; opacity: 0.65; font-weight: 600; }
 
     /* Section generic */
     section.block { padding: 4.5rem 0; }
@@ -247,7 +256,8 @@
     .eco-card h3 { margin: 0 0 0.5rem; font-size: 1.08rem; font-weight: 700; padding-right: 4rem; }
     .eco-card p { margin: 0 0 1rem; font-size: 0.92rem; color: var(--muted); }
     .eco-card.featured p { color: rgba(255,255,255,0.75); }
-    .eco-card .link { font-size: 0.88rem; font-weight: 700; color: var(--violet); text-decoration: none; }
+    .eco-card .link { font-size: 0.88rem; font-weight: 700; color: var(--violet); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: transparent; transition: text-decoration-color 0.15s ease; }
+    .eco-card .link:hover, .eco-card .link:focus-visible { text-decoration-color: currentColor; }
     .eco-card.featured .link { color: #fff; }
 
     /* FAQ accordion */
@@ -326,7 +336,7 @@
   <main id="main">
     <section class="hero">
       <div class="wrap hero-inner">
-        <h1>Build the English skills that <span class="accent">unlock your next opportunity.</span></h1>
+        <h1>Build the English skills that unlock your next opportunity.</h1>
         <p class="lead">WA IELTS Academy coaches students in Perth and worldwide toward visa approval, university entry and career growth, with personalised 1:1 and small-group IELTS and PTE coaching. We speak English, Italian and Spanish.</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="https://www.waieltsacademy.com.au/free-info-session" target="_blank" rel="noopener">Book a free info session</a>
@@ -344,11 +354,25 @@
     <section class="transform reveal">
       <div class="wrap">
         <h2>People don't prepare for IELTS because they want an exam. They prepare because a score stands between them and a future.</h2>
-        <div class="flow">
-          <div class="flow-step"><span class="num">1</span><p>Current English level</p></div>
-          <div class="flow-step"><span class="num">2</span><p>Target IELTS score</p></div>
-          <div class="flow-step"><span class="num">3</span><p>Study, visa or career access</p></div>
-          <div class="flow-step"><span class="num">4</span><p>Life opportunity</p></div>
+        <div class="band">
+          <div class="band-row">
+            <div class="band-pin start" style="left: 56.25%;">
+              <span class="caption">Your band today</span>
+              <span class="value">5.5</span>
+              <span class="dot"></span>
+            </div>
+            <div class="band-pin target" style="left: 81.25%;">
+              <span class="dot"></span>
+              <span class="value">7.5</span>
+              <span class="caption">Your target band</span>
+            </div>
+            <div class="band-track">
+              <div class="band-segment" style="left: 56.25%; width: 25%;"></div>
+            </div>
+          </div>
+          <div class="band-numbers" aria-hidden="true">
+            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+          </div>
         </div>
       </div>
     </section>
@@ -441,7 +465,7 @@
           <div class="team-card">
             <div class="avatar">V</div>
             <h3>Valentina</h3>
-            <div class="role">Founder &amp; Head Coach · TESOL, IELTS</div>
+            <div class="role">Founder &amp; Head Coach</div>
             <p>Degree in Languages (University of Verona) and Cert IV in TESOL. Personalised study plans that build confidence fast.</p>
           </div>
           <div class="team-card">
@@ -453,13 +477,13 @@
           <div class="team-card">
             <div class="avatar">R</div>
             <h3>Reya</h3>
-            <div class="role">PTE Tutor · PTE 90 Scorer</div>
+            <div class="role">PTE Tutor</div>
             <p>5+ years of professional PTE tutoring, helping students reach 79+ and even 90 scores.</p>
           </div>
           <div class="team-card">
             <div class="avatar">C</div>
             <h3>Craig</h3>
-            <div class="role">IELTS Specialist · TESOL Educator</div>
+            <div class="role">IELTS Specialist</div>
             <p>7+ years teaching in Japan, Malaysia and now Perth. Postgraduate degree in TESOL education.</p>
           </div>
           <div class="team-card">
@@ -547,12 +571,12 @@
           <div class="testi-card">
             <div class="stars">★★★★★</div>
             <blockquote>"I studied for months on my own but my scores wouldn't improve. Then I found WA IELTS. Valentina understood my weaknesses right away, gave me a clear plan, and transformed them into strengths. I achieved the score I had been dreaming of."</blockquote>
-            <cite>Alvaro G. — Dream score achieved</cite>
+            <cite>Alvaro G.</cite>
           </div>
           <div class="testi-card">
             <div class="stars">★★★★★</div>
             <blockquote>"After failing IELTS, Valentina was everything I needed. My reading was 5, after a few lessons with her, I got 6. I couldn't believe it. I strongly recommend her."</blockquote>
-            <cite>Marco T. — Reading: Band 5 → Band 6</cite>
+            <cite>Marco T.</cite>
           </div>
           <div class="testi-nav">
             <button class="testi-dot" aria-current="true" data-index="0" aria-label="Review 1"></button>
@@ -578,14 +602,14 @@
             <div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3.1-6.5 7-6.5s7 2.5 7 6.5"/></svg></div>
             <h3>WA IELTS Academy</h3>
             <p>Expert human coaching: one-to-one sessions, memberships, mock testing and essay evaluation.</p>
-            <a class="link" href="https://www.waieltsacademy.com.au/free-info-session" target="_blank" rel="noopener">Book a session →</a>
+            <a class="link" href="https://www.waieltsacademy.com.au/free-info-session" target="_blank" rel="noopener">Book a session</a>
           </div>
           <div class="eco-card featured">
             <span class="status status-live">Live</span>
             <div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M15 9l-2 6-6 2 2-6 6-2Z"/></svg></div>
             <h3>WA IELTS Practice</h3>
             <p>Free diagnostics and exercises that show you where you stand and what to work on first.</p>
-            <a class="link" href="https://practice.waielts.com" target="_blank" rel="noopener">Open the app →</a>
+            <a class="link" href="https://practice.waielts.com" target="_blank" rel="noopener">Open the app</a>
           </div>
           <div class="eco-card">
             <span class="status status-build">Building</span>
