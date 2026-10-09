@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WA IELTS | Build the English skills that unlock your future</title>
-  <meta name="description" content="WA IELTS combines expert human coaching with AI-backed practice and feedback, so you always know what's holding your score back and exactly what to do next.">
+  <meta name="description" content="WA IELTS combines expert human coaching from WA IELTS Academy with AI-backed practice and feedback, so you always know what's holding your score back and exactly what to do next.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -18,6 +18,7 @@
       --coral: #cc3b18;
       --coral-tint: #fff1ec;
       --mint: #15b899;
+      --gold: #8f6207;
       --paper: #ffffff;
       --line: #e9e1f5;
       --muted: #5c5a6b;
@@ -43,6 +44,14 @@
 
     .wrap { max-width: 76rem; margin: 0 auto; padding-left: 1.5rem; padding-right: 1.5rem; }
 
+    /* Reveal-on-scroll */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      html { scroll-behavior: auto; }
+    }
+
     /* Nav */
     header.topbar {
       position: sticky; top: 0; z-index: 30;
@@ -50,23 +59,28 @@
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--line);
     }
-    .topbar-inner { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 0; }
+    .topbar-inner { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 0; gap: 1rem; }
     .wordmark {
       font-weight: 800; font-size: 1.35rem; letter-spacing: -0.01em;
-      color: var(--ink); text-decoration: none;
+      color: var(--ink); text-decoration: none; flex-shrink: 0;
     }
     .wordmark b { color: var(--violet); }
-    nav.primary { display: flex; gap: 2rem; }
-    nav.primary a { text-decoration: none; color: var(--ink); font-size: 0.95rem; font-weight: 600; opacity: 0.75; }
+    nav.primary { display: flex; gap: 1.75rem; }
+    nav.primary a {
+      text-decoration: none; color: var(--ink); font-size: 0.92rem; font-weight: 600; opacity: 0.65;
+      padding-bottom: 0.2rem; border-bottom: 2px solid transparent;
+    }
     nav.primary a:hover { opacity: 1; }
-    @media (max-width: 800px) { nav.primary { display: none; } }
+    nav.primary a.active { opacity: 1; border-color: var(--violet); }
+    @media (max-width: 920px) { nav.primary { display: none; } }
 
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
       padding: 0.85rem 1.6rem; border-radius: 999px;
       font-weight: 700; font-size: 0.95rem; text-decoration: none;
-      border: 2px solid transparent; white-space: nowrap;
+      border: 2px solid transparent; white-space: nowrap; cursor: pointer;
     }
+    .btn-sm { padding: 0.6rem 1.2rem; font-size: 0.88rem; }
     .btn-primary { background: var(--violet); color: #fff; }
     .btn-primary:hover { background: var(--violet-dark); }
     .btn-ghost { background: #fff; color: var(--ink); border-color: var(--line); }
@@ -77,104 +91,118 @@
     /* Hero */
     .hero {
       background: linear-gradient(180deg, var(--violet-tint) 0%, #ffffff 100%);
-      padding: 5rem 0 4rem;
+      padding: 4.5rem 0 3rem;
     }
     .hero-inner { max-width: 50rem; }
     .hero h1 {
-      font-size: clamp(2.6rem, 6vw, 4.4rem);
+      font-size: clamp(2.5rem, 5.6vw, 4.1rem);
       line-height: 1.08; letter-spacing: -0.03em; font-weight: 800;
-      margin: 0 0 1.5rem;
+      margin: 0 0 1.25rem;
     }
     .hero h1 .accent { color: var(--violet); }
     .hero p.lead {
-      font-size: 1.25rem; color: var(--muted); max-width: 38rem; margin: 0 0 2.25rem;
+      font-size: 1.18rem; color: var(--muted); max-width: 38rem; margin: 0 0 2rem;
     }
-    .cta-row { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.5rem; }
-    .trust-strip { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-    .trust-chip {
+    .cta-row { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
+    .outcome-row { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .outcome-chip {
       display: inline-flex; align-items: center; gap: 0.4rem;
       background: #fff; border: 1px solid var(--line); border-radius: 999px;
       padding: 0.45rem 0.95rem; font-size: 0.85rem; font-weight: 600; color: var(--ink);
     }
-    .trust-chip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--mint); }
+    .outcome-chip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--mint); }
 
     /* Transformation band */
     .transform {
       background: linear-gradient(135deg, var(--violet-deep) 0%, var(--violet-dark) 55%, var(--violet) 100%);
-      color: #fff;
-      padding: 4.5rem 0;
+      color: #fff; padding: 4rem 0;
     }
-    .transform h2 {
-      font-size: clamp(1.8rem, 3.6vw, 2.6rem);
-      font-weight: 800; letter-spacing: -0.02em; max-width: 34rem; margin: 0 0 2.5rem;
-    }
-    .flow {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
-    }
+    .transform h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); font-weight: 800; letter-spacing: -0.02em; max-width: 34rem; margin: 0 0 2.25rem; }
+    .flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
     @media (max-width: 860px) { .flow { grid-template-columns: repeat(2, 1fr); } }
-    .flow-step {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.18);
-      border-radius: 20px;
-      padding: 1.5rem;
-    }
-    .flow-step .num {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 2rem; height: 2rem; border-radius: 50%;
-      background: #fff; color: var(--violet-deep); font-weight: 800; font-size: 0.9rem;
-      margin-bottom: 1rem;
-    }
-    .flow-step p { margin: 0; font-weight: 600; font-size: 1.02rem; }
+    .flow-step { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); border-radius: 20px; padding: 1.4rem; }
+    .flow-step .num { display: inline-flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; border-radius: 50%; background: #fff; color: var(--violet-deep); font-weight: 800; font-size: 0.9rem; margin-bottom: 0.9rem; }
+    .flow-step p { margin: 0; font-weight: 600; font-size: 1rem; }
 
     /* Section generic */
-    section.block { padding: 5rem 0; }
-    .section-head { max-width: 42rem; margin-bottom: 2.75rem; }
-    .section-head h2 {
-      font-size: clamp(1.9rem, 3.4vw, 2.5rem); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 0.75rem;
-    }
-    .section-head p { color: var(--muted); font-size: 1.08rem; margin: 0; }
+    section.block { padding: 4.5rem 0; }
+    .section-head { max-width: 42rem; margin-bottom: 2.5rem; }
+    .section-head .eyebrow-label { font-size: 0.82rem; font-weight: 700; color: var(--violet); margin: 0 0 0.5rem; }
+    .section-head h2 { font-size: clamp(1.8rem, 3.2vw, 2.4rem); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 0.75rem; }
+    .section-head p { color: var(--muted); font-size: 1.05rem; margin: 0; }
 
-    /* Positioning */
-    .position-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.1rem; }
-    @media (max-width: 900px) { .position-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 540px) { .position-grid { grid-template-columns: 1fr; } }
-    .position-card {
-      border: 1px solid var(--line); border-radius: 20px; padding: 1.5rem; background: #fff;
+    /* Differentiators */
+    .diff-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.1rem; }
+    @media (max-width: 900px) { .diff-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 540px) { .diff-grid { grid-template-columns: 1fr; } }
+    .diff-card { border: 1px solid var(--line); border-radius: 20px; padding: 1.5rem; background: #fff; }
+    .diff-card .glyph { width: 2.6rem; height: 2.6rem; border-radius: 10px; background: var(--violet-tint); color: var(--violet); display: grid; place-items: center; font-weight: 800; margin-bottom: 1rem; font-size: 1.1rem; }
+    .diff-card h3 { margin: 0 0 0.5rem; font-size: 1rem; font-weight: 700; }
+    .diff-card p { margin: 0; font-size: 0.88rem; color: var(--muted); }
+
+    /* Program tabs */
+    .program { background: var(--violet-tint); }
+    .tabs { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2rem; }
+    .tab-btn {
+      border: 2px solid transparent; background: #fff; color: var(--muted);
+      font-family: inherit; font-weight: 700; font-size: 0.92rem;
+      padding: 0.65rem 1.3rem; border-radius: 999px; cursor: pointer;
     }
-    .position-card .strength {
-      display: inline-block; font-size: 0.72rem; font-weight: 700; color: var(--mint);
-      background: rgba(21,184,153,0.12); padding: 0.2rem 0.6rem; border-radius: 999px; margin-bottom: 0.75rem;
+    .tab-btn[aria-selected="true"] { background: var(--violet); color: #fff; }
+    .tab-panel { display: none; background: #fff; border-radius: 24px; padding: 2rem; border: 1px solid #e3d4f6; }
+    .tab-panel.active { display: block; }
+    .tab-panel h3 { margin: 0 0 1rem; font-size: 1.2rem; font-weight: 800; }
+    .tab-panel ul { margin: 0; padding-left: 1.2rem; color: var(--muted); font-size: 0.96rem; }
+    .tab-panel ul li { margin-bottom: 0.6rem; }
+
+    /* Team */
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.1rem; }
+    .team-card { border: 1px solid var(--line); border-radius: 20px; padding: 1.5rem; }
+    .avatar {
+      width: 3rem; height: 3rem; border-radius: 50%;
+      background: var(--violet); color: #fff; font-weight: 800; font-size: 1.05rem;
+      display: grid; place-items: center; margin-bottom: 1rem;
     }
-    .position-card h3 { margin: 0 0 0.5rem; font-size: 1rem; font-weight: 700; }
-    .position-card p { margin: 0; font-size: 0.88rem; color: var(--muted); }
-    .position-highlight {
-      grid-column: 1 / -1;
-      background: var(--violet-tint);
-      border: 1px solid #e3d4f6;
-      border-radius: 24px; padding: 2rem;
+    .team-card h3 { margin: 0 0 0.15rem; font-size: 1.02rem; font-weight: 700; }
+    .team-card .role { font-size: 0.82rem; color: var(--violet); font-weight: 700; margin-bottom: 0.6rem; }
+    .team-card p { margin: 0; font-size: 0.86rem; color: var(--muted); }
+
+    /* Pricing */
+    .pricing { background: var(--violet-tint); }
+    .price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.1rem; }
+    .price-card { background: #fff; border: 1px solid #e3d4f6; border-radius: 22px; padding: 1.6rem; display: flex; flex-direction: column; }
+    .price-card.highlight { border: 2px solid var(--violet); position: relative; }
+    .price-card .badge { position: absolute; top: -0.7rem; left: 1.5rem; background: var(--violet); color: #fff; font-size: 0.7rem; font-weight: 700; padding: 0.25rem 0.7rem; border-radius: 999px; }
+    .price-card h3 { margin: 0 0 0.5rem; font-size: 1.02rem; font-weight: 700; }
+    .price-card .amount { font-size: 1.9rem; font-weight: 800; margin-bottom: 0.1rem; }
+    .price-card .amount small { font-size: 0.85rem; font-weight: 600; color: var(--muted); }
+    .price-card .fee { font-size: 0.78rem; color: var(--muted); margin-bottom: 1rem; }
+    .price-card .desc { font-size: 0.86rem; color: var(--muted); margin-bottom: 1.2rem; flex-grow: 1; }
+    .price-card .btn { align-self: flex-start; }
+
+    /* Testimonials */
+    .testi-wrap { position: relative; max-width: 42rem; margin: 0 auto; }
+    .testi-card {
+      background: #fff; border: 1px solid var(--line); border-radius: 24px; padding: 2.25rem;
+      text-align: center; display: none;
     }
-    .position-highlight h3 { margin: 0 0 0.6rem; font-size: 1.3rem; font-weight: 800; color: var(--violet-dark); }
-    .position-highlight p { margin: 0; color: var(--ink); font-size: 1.02rem; max-width: 42rem; }
+    .testi-card.active { display: block; }
+    .stars { color: var(--gold); font-size: 1.1rem; margin-bottom: 1rem; letter-spacing: 0.1em; }
+    .testi-card blockquote { margin: 0 0 1.25rem; font-size: 1.1rem; font-weight: 600; line-height: 1.5; }
+    .testi-card cite { font-style: normal; font-size: 0.88rem; color: var(--muted); font-weight: 600; }
+    .testi-nav { display: flex; justify-content: center; gap: 0.6rem; margin-top: 1.5rem; }
+    .testi-dot { width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--line); border: none; cursor: pointer; padding: 0; }
+    .testi-dot[aria-current="true"] { background: var(--violet); }
 
     /* Ecosystem */
     .eco-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1.25rem; }
-    .eco-card {
-      border-radius: 24px; padding: 1.75rem; position: relative;
-      background: #fff; border: 1px solid var(--line);
-    }
+    .eco-card { border-radius: 24px; padding: 1.75rem; position: relative; background: #fff; border: 1px solid var(--line); }
     .eco-card.featured { background: var(--ink); color: #fff; border: none; }
-    .eco-card .status {
-      position: absolute; top: 1.6rem; right: 1.6rem;
-      font-size: 0.7rem; font-weight: 700; padding: 0.25rem 0.65rem; border-radius: 999px;
-    }
+    .eco-card .status { position: absolute; top: 1.6rem; right: 1.6rem; font-size: 0.7rem; font-weight: 700; padding: 0.25rem 0.65rem; border-radius: 999px; }
     .status-live { background: rgba(21,184,153,0.15); color: var(--mint); }
     .eco-card.featured .status-live { background: rgba(21,184,153,0.22); color: #4be3c6; }
-    .status-build { background: rgba(255,106,77,0.13); color: #d94a2e; }
-    .eco-card .glyph {
-      width: 2.75rem; height: 2.75rem; border-radius: 12px;
-      background: var(--violet-tint); color: var(--violet);
-      display: grid; place-items: center; font-weight: 800; font-size: 1.2rem; margin-bottom: 1.1rem;
-    }
+    .status-build { background: rgba(204,59,24,0.1); color: var(--coral); }
+    .eco-card .glyph { width: 2.75rem; height: 2.75rem; border-radius: 12px; background: var(--violet-tint); color: var(--violet); display: grid; place-items: center; font-weight: 800; font-size: 1.2rem; margin-bottom: 1.1rem; }
     .eco-card.featured .glyph { background: rgba(255,255,255,0.12); color: #fff; }
     .eco-card h3 { margin: 0 0 0.5rem; font-size: 1.08rem; font-weight: 700; padding-right: 4rem; }
     .eco-card p { margin: 0 0 1rem; font-size: 0.92rem; color: var(--muted); }
@@ -182,28 +210,17 @@
     .eco-card .link { font-size: 0.88rem; font-weight: 700; color: var(--violet); text-decoration: none; }
     .eco-card.featured .link { color: #fff; }
 
-    /* Principles - warm section */
-    .warm { background: var(--coral-tint); }
-    .principles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
-    @media (max-width: 700px) { .principles { grid-template-columns: 1fr; } }
-    .principle {
-      background: #fff; border-radius: 20px; padding: 1.5rem; border: 1px solid #f3ddd4;
+    /* FAQ accordion */
+    .faq-item { border-bottom: 1px solid var(--line); }
+    .faq-q {
+      width: 100%; text-align: left; background: none; border: none; cursor: pointer;
+      font-family: inherit; font-size: 1.02rem; font-weight: 700; color: var(--ink);
+      padding: 1.25rem 0; display: flex; justify-content: space-between; align-items: center; gap: 1rem;
     }
-    .principle .check {
-      width: 1.6rem; height: 1.6rem; border-radius: 50%; background: var(--coral); color: #fff;
-      display: grid; place-items: center; font-size: 0.85rem; font-weight: 800; margin-bottom: 0.85rem;
-    }
-    .principle h3 { margin: 0 0 0.4rem; font-size: 1.04rem; font-weight: 700; }
-    .principle p { margin: 0; color: var(--muted); font-size: 0.92rem; }
-
-    /* Segments */
-    .segments { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
-    @media (max-width: 860px) { .segments { grid-template-columns: 1fr; } }
-    .segment-card {
-      border: 1px solid var(--line); border-radius: 20px; padding: 1.75rem;
-    }
-    .segment-card h3 { margin: 0 0 0.5rem; font-size: 1.08rem; font-weight: 700; }
-    .segment-card p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+    .faq-q .plus { font-size: 1.4rem; color: var(--violet); flex-shrink: 0; transition: transform 0.25s ease; }
+    .faq-q[aria-expanded="true"] .plus { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .faq-a p { margin: 0 0 1.25rem; color: var(--muted); font-size: 0.95rem; max-width: 42rem; }
 
     /* CTA band */
     .cta-band {
@@ -211,18 +228,16 @@
       color: #fff; border-radius: 28px; padding: 3rem;
       display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.75rem;
     }
-    .cta-band h2 { margin: 0 0 0.5rem; font-size: 1.7rem; font-weight: 800; letter-spacing: -0.01em; }
+    .cta-band h2 { margin: 0 0 0.5rem; font-size: 1.6rem; font-weight: 800; letter-spacing: -0.01em; }
     .cta-band p { margin: 0; opacity: 0.92; max-width: 28rem; }
     .cta-band .row { display: flex; gap: 0.85rem; flex-wrap: wrap; }
 
     footer { border-top: 1px solid var(--line); padding: 3rem 0 2rem; }
-    .footer-inner {
-      display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1.5rem;
-      font-size: 0.88rem; color: var(--muted); margin-bottom: 1.5rem;
-    }
+    .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1.5rem; font-size: 0.88rem; color: var(--muted); margin-bottom: 1.25rem; }
     .footer-inner nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
     .footer-inner a { text-decoration: none; color: var(--muted); }
     .footer-inner a:hover { color: var(--ink); }
+    .footer-meta { font-size: 0.84rem; color: var(--muted); margin-bottom: 1rem; }
     .footer-note { font-size: 0.78rem; color: var(--muted); max-width: 76rem; opacity: 0.9; }
   </style>
 </head>
@@ -233,12 +248,13 @@
     <div class="wrap topbar-inner">
       <a class="wordmark" href="#main">WA <b>IELTS</b></a>
       <nav class="primary" aria-label="Primary">
+        <a href="#programs">Programs</a>
+        <a href="#team">Team</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#reviews">Reviews</a>
         <a href="#ecosystem">Ecosystem</a>
-        <a href="#why">Why WA IELTS</a>
-        <a href="#how">How it works</a>
-        <a href="#who">Who it's for</a>
       </nav>
-      <a class="btn btn-primary" href="https://practice.waielts.com" target="_blank" rel="noopener">Start free practice</a>
+      <a class="btn btn-primary btn-sm" href="https://www.waieltsacademy.com.au/free-info-session" target="_blank" rel="noopener">Book free info session</a>
     </div>
   </header>
 
@@ -246,20 +262,21 @@
     <section class="hero">
       <div class="wrap hero-inner">
         <h1>Build the English skills that <span class="accent">unlock your next opportunity.</span></h1>
-        <p class="lead">WA IELTS combines expert human coaching with AI-backed practice and feedback, so you always know what's holding your score back and exactly what to do next.</p>
+        <p class="lead">WA IELTS Academy coaches students in Perth and worldwide toward visa approval, university entry and career growth, with personalised 1:1 and small-group IELTS and PTE coaching. We speak English, Italian and Spanish.</p>
         <div class="cta-row">
-          <a class="btn btn-primary" href="https://practice.waielts.com" target="_blank" rel="noopener">Start free practice</a>
-          <a class="btn btn-ghost" href="#start">Book expert coaching</a>
+          <a class="btn btn-primary" href="https://www.waieltsacademy.com.au/free-info-session" target="_blank" rel="noopener">Book a free info session</a>
+          <a class="btn btn-ghost" href="https://practice.waielts.com" target="_blank" rel="noopener">Start free practice</a>
         </div>
-        <div class="trust-strip">
-          <span class="trust-chip"><span class="dot"></span> Built by IELTS coaches</span>
-          <span class="trust-chip"><span class="dot"></span> Human feedback, not just AI</span>
-          <span class="trust-chip"><span class="dot"></span> Part of WA IELTS Academy</span>
+        <div class="outcome-row">
+          <span class="outcome-chip"><span class="dot"></span> Visa approval</span>
+          <span class="outcome-chip"><span class="dot"></span> University entry</span>
+          <span class="outcome-chip"><span class="dot"></span> Career growth</span>
+          <span class="outcome-chip"><span class="dot"></span> Everyday confidence</span>
         </div>
       </div>
     </section>
 
-    <section class="transform">
+    <section class="transform reveal">
       <div class="wrap">
         <h2>People don't prepare for IELTS because they want an exam. They prepare because a score stands between them and a future.</h2>
         <div class="flow">
@@ -271,42 +288,217 @@
       </div>
     </section>
 
-    <section class="block" id="why">
+    <section class="block reveal">
       <div class="wrap">
         <div class="section-head">
-          <h2>Generic apps don't know your target score. Isolated tutors don't scale with you.</h2>
-          <p>WA IELTS sits at the intersection of four approaches, built to carry their strengths without their weaknesses.</p>
+          <h2>What makes WA IELTS Academy different</h2>
+          <p>A proven system combining expert guidance, structured preparation and targeted feedback, through private lessons, small-group coaching and online sessions.</p>
         </div>
-        <div class="position-grid">
-          <div class="position-card">
-            <span class="strength">Trust &amp; expertise</span>
-            <h3>Traditional academies</h3>
-            <p>Strong human expertise, but limited scalability and availability.</p>
+        <div class="diff-grid">
+          <div class="diff-card">
+            <div class="glyph">🎯</div>
+            <h3>Personalised diagnostic assessment</h3>
+            <p>We identify your level and design a clear path to your target score.</p>
           </div>
-          <div class="position-card">
-            <span class="strength">Choice &amp; support</span>
-            <h3>Tutor marketplaces</h3>
-            <p>Personal attention, but inconsistent method and a fragmented journey.</p>
+          <div class="diff-card">
+            <div class="glyph">📝</div>
+            <h3>Real IELTS practice</h3>
+            <p>Mock tests and exam simulations with detailed, actionable feedback.</p>
           </div>
-          <div class="position-card">
-            <span class="strength">Scalable practice</span>
-            <h3>Test-prep platforms</h3>
-            <p>Lots of exercises, but a generic experience with little personalisation.</p>
+          <div class="diff-card">
+            <div class="glyph">🕐</div>
+            <h3>Flexible learning</h3>
+            <p>Study online or face-to-face in Perth, on your own schedule.</p>
           </div>
-          <div class="position-card">
-            <span class="strength">Speed &amp; low cost</span>
-            <h3>Generic AI assistants</h3>
-            <p>Fast answers, but weak pedagogical structure and no accountability for your score.</p>
-          </div>
-          <div class="position-highlight">
-            <h3>WA IELTS is built around your target score, your gaps and your real-world goal</h3>
-            <p>Not a replacement for expert judgement, and not a generic chatbot. A structured method, expert oversight and intelligent feedback, working together toward the score you actually need.</p>
+          <div class="diff-card">
+            <div class="glyph">💬</div>
+            <h3>Confidence-driven coaching</h3>
+            <p>We build not only your score, but your ability to communicate in real life.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="block" id="ecosystem" style="background:var(--violet-tint);">
+    <section class="block program reveal" id="programs">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>What you'll learn, skill by skill</h2>
+          <p>IELTS is a strategic exam. We train exam technique alongside real English ability, for both Academic and General Training.</p>
+        </div>
+        <div class="tabs" role="tablist" aria-label="IELTS skills">
+          <button class="tab-btn" role="tab" aria-selected="true" data-tab="listening">Listening</button>
+          <button class="tab-btn" role="tab" aria-selected="false" data-tab="reading">Reading</button>
+          <button class="tab-btn" role="tab" aria-selected="false" data-tab="writing">Writing</button>
+          <button class="tab-btn" role="tab" aria-selected="false" data-tab="speaking">Speaking</button>
+        </div>
+        <div class="tab-panel active" id="panel-listening" role="tabpanel">
+          <h3>Listening</h3>
+          <ul>
+            <li>Strategies for every question type</li>
+            <li>Real exam audio simulations</li>
+            <li>Accent training: UK, US, Australia and more</li>
+          </ul>
+        </div>
+        <div class="tab-panel" id="panel-reading" role="tabpanel">
+          <h3>Reading</h3>
+          <ul>
+            <li>Academic and General Training techniques</li>
+            <li>Skimming, scanning and time-saving methods</li>
+            <li>Spotting traps and distractors</li>
+          </ul>
+        </div>
+        <div class="tab-panel" id="panel-writing" role="tabpanel">
+          <h3>Writing</h3>
+          <ul>
+            <li>Task 1 (charts, letters) and Task 2 (essay) breakdown</li>
+            <li>Grammar, structure and vocabulary training</li>
+            <li>Personalised feedback with band estimates and next steps</li>
+          </ul>
+        </div>
+        <div class="tab-panel" id="panel-speaking" role="tabpanel">
+          <h3>Speaking</h3>
+          <ul>
+            <li>Fluency, coherence and pronunciation coaching</li>
+            <li>Mock interviews with feedback</li>
+            <li>Cue cards and real question practice</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="block reveal" id="team">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Meet the coaches</h2>
+          <p>A qualified team based in Perth, teaching students across Australia and worldwide.</p>
+        </div>
+        <div class="team-grid">
+          <div class="team-card">
+            <div class="avatar">V</div>
+            <h3>Valentina</h3>
+            <div class="role">Founder &amp; Head Coach · TESOL, IELTS</div>
+            <p>Degree in Languages (University of Verona) and Cert IV in TESOL. Personalised study plans that build confidence fast.</p>
+          </div>
+          <div class="team-card">
+            <div class="avatar">A</div>
+            <h3>Aiko</h3>
+            <div class="role">ESL &amp; English Assessment Educator</div>
+            <p>15+ years across Australia and Japan. Double Master's in Applied Linguistics/TESOL and Translation Studies (Macquarie).</p>
+          </div>
+          <div class="team-card">
+            <div class="avatar">R</div>
+            <h3>Reya</h3>
+            <div class="role">PTE Tutor · PTE 90 Scorer</div>
+            <p>5+ years of professional PTE tutoring, helping students reach 79+ and even 90 scores.</p>
+          </div>
+          <div class="team-card">
+            <div class="avatar">C</div>
+            <h3>Craig</h3>
+            <div class="role">IELTS Specialist · TESOL Educator</div>
+            <p>7+ years teaching in Japan, Malaysia and now Perth. Postgraduate degree in TESOL education.</p>
+          </div>
+          <div class="team-card">
+            <div class="avatar">W</div>
+            <h3>Wesley</h3>
+            <div class="role">IELTS Writing &amp; Adult Education</div>
+            <p>TESOL, CELTA, Cert IV in Literacy and Numeracy. Author of a best-selling book on IELTS writing.</p>
+          </div>
+          <div class="team-card">
+            <div class="avatar">G</div>
+            <h3>Gian</h3>
+            <div class="role">CELTA, TESOL &amp; TEFL</div>
+            <p>General and Conversational English, native Italian speaker, engaging and interactive approach.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block pricing reveal" id="pricing">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Packages built around your goal</h2>
+          <p>All prices in AUD. Choose the pace and intensity that fits your timeline.</p>
+        </div>
+        <div class="price-grid">
+          <div class="price-card highlight">
+            <span class="badge">Most popular</span>
+            <h3>IELTS Accelerate 1:1</h3>
+            <div class="amount">A$797</div>
+            <div class="fee">+ A$35 set-up fee · 10 hours · valid 3 months</div>
+            <p class="desc">10 hours of expert 1:1 coaching across all 4 modules, from solid foundations to exam-ready.</p>
+            <a class="btn btn-primary btn-sm" href="https://www.waieltsacademy.com.au/pricing-plans/list" target="_blank" rel="noopener">Select</a>
+          </div>
+          <div class="price-card">
+            <h3>3 Months IELTS Journey</h3>
+            <div class="amount">A$150<small>/week</small></div>
+            <div class="fee">+ A$30 set-up fee · valid 12 weeks</div>
+            <p class="desc">Commit to 3 months, become part of the family and get exam-ready the steady way.</p>
+            <a class="btn btn-ghost btn-sm" href="https://www.waieltsacademy.com.au/pricing-plans/list" target="_blank" rel="noopener">Select</a>
+          </div>
+          <div class="price-card">
+            <h3>1:1 IELTS/PTE weekly membership</h3>
+            <div class="amount">A$167<small>/week</small></div>
+            <div class="fee">+ A$25 set-up fee · 2 meetings/week</div>
+            <p class="desc">Personalised attention with your coach, all materials and AI tools included.</p>
+            <a class="btn btn-ghost btn-sm" href="https://www.waieltsacademy.com.au/pricing-plans/list" target="_blank" rel="noopener">Select</a>
+          </div>
+          <div class="price-card">
+            <h3>General English weekly membership</h3>
+            <div class="amount">A$350<small>/week</small></div>
+            <div class="fee">2 coaching meetings + conversation &amp; grammar classes</div>
+            <p class="desc">Blends grammar, vocabulary growth and IELTS strategy for students improving overall English.</p>
+            <a class="btn btn-ghost btn-sm" href="https://www.waieltsacademy.com.au/pricing-plans/list" target="_blank" rel="noopener">Select</a>
+          </div>
+          <div class="price-card">
+            <h3>Writing &amp; speaking skills</h3>
+            <div class="amount">A$197<small>/week</small></div>
+            <div class="fee">+ A$7 joining fee · 4-week minimum</div>
+            <p class="desc">Unlimited writing submissions for feedback, plus speaking practice, for students focused on productive skills.</p>
+            <a class="btn btn-ghost btn-sm" href="https://www.waieltsacademy.com.au/pricing-plans/list" target="_blank" rel="noopener">Select</a>
+          </div>
+          <div class="price-card">
+            <h3>Private 1:1 class</h3>
+            <div class="amount">From A$97</div>
+            <div class="fee">1-2 hours, pay as you go</div>
+            <p class="desc">A single tailored session targeting your individual strengths and gaps, no commitment required.</p>
+            <a class="btn btn-ghost btn-sm" href="https://www.waieltsacademy.com.au/private-lessons" target="_blank" rel="noopener">Select</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block reveal" id="reviews">
+      <div class="wrap">
+        <div class="section-head" style="margin-left:auto;margin-right:auto;text-align:center;">
+          <h2>What students say</h2>
+          <p>Real reviews from students who trained with WA IELTS Academy.</p>
+        </div>
+        <div class="testi-wrap">
+          <div class="testi-card active">
+            <div class="stars">★★★★★</div>
+            <blockquote>"The course covered all 4 skills. Valentina is extremely knowledgeable and supportive, the mock exams and materials were essential. I feel more confident and my English genuinely improved."</blockquote>
+            <cite>Google Review</cite>
+          </div>
+          <div class="testi-card">
+            <div class="stars">★★★★★</div>
+            <blockquote>"I studied for months on my own but my scores wouldn't improve. Then I found WA IELTS. Valentina understood my weaknesses right away, gave me a clear plan, and transformed them into strengths. I achieved the score I had been dreaming of."</blockquote>
+            <cite>Alvaro G. — Dream score achieved</cite>
+          </div>
+          <div class="testi-card">
+            <div class="stars">★★★★★</div>
+            <blockquote>"After failing IELTS, Valentina was everything I needed. My reading was 5, after a few lessons with her, I got 6. I couldn't believe it. I strongly recommend her."</blockquote>
+            <cite>Marco T. — Reading: Band 5 → Band 6</cite>
+          </div>
+          <div class="testi-nav">
+            <button class="testi-dot" aria-current="true" data-index="0" aria-label="Review 1"></button>
+            <button class="testi-dot" data-index="1" aria-label="Review 2"></button>
+            <button class="testi-dot" data-index="2" aria-label="Review 3"></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block reveal" id="ecosystem" style="background:var(--violet-tint);">
       <div class="wrap">
         <div class="section-head">
           <h2>One ecosystem, built one validated product at a time</h2>
@@ -318,7 +510,7 @@
             <div class="glyph">👩‍🏫</div>
             <h3>WA IELTS Academy</h3>
             <p>Expert human coaching: one-to-one sessions, memberships, mock testing and essay evaluation.</p>
-            <a class="link" href="#start">Talk to a coach →</a>
+            <a class="link" href="https://www.waieltsacademy.com.au/free-info-session" target="_blank" rel="noopener">Book a session →</a>
           </div>
           <div class="eco-card featured">
             <span class="status status-live">Live</span>
@@ -355,70 +547,56 @@
       </div>
     </section>
 
-    <section class="block warm" id="how">
+    <section class="block reveal">
       <div class="wrap">
         <div class="section-head">
-          <h2>How WA IELTS approaches your learning</h2>
-          <p>The same principles guide every product we build, human-led or AI-backed.</p>
+          <h2>Frequently asked questions</h2>
         </div>
-        <div class="principles">
-          <div class="principle">
-            <span class="check">✓</span>
-            <h3>Target-led from day one</h3>
-            <p>We start with your current level, your target score, your deadline and your purpose, not a generic curriculum.</p>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="true">What is IELTS, exactly? <span class="plus">+</span></button>
+            <div class="faq-a" style="max-height: 10rem;">
+              <p>The International English Language Testing System is the world's most widely recognised English proficiency exam, trusted by governments, universities and employers in Australia, the UK, Canada and New Zealand. It assesses Listening, Reading, Writing and Speaking.</p>
+            </div>
           </div>
-          <div class="principle">
-            <span class="check">✓</span>
-            <h3>Feedback you can act on</h3>
-            <p>Every piece of feedback explains what's wrong, why it limits your score, and exactly what to practise next.</p>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">Why do I need coaching if my English is already good? <span class="plus">+</span></button>
+            <div class="faq-a">
+              <p>IELTS is not just an English test, it's a strategic exam. Many candidates with good English struggle to reach their target score because they're unfamiliar with the exam structure, timing and specific expectations required to achieve a high band.</p>
+            </div>
           </div>
-          <div class="principle">
-            <span class="check">✓</span>
-            <h3>Progress you can see</h3>
-            <p>Skill indicators, recurring error patterns and an estimated score range show your improvement over time.</p>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">Can I study online, or only in person? <span class="plus">+</span></button>
+            <div class="faq-a">
+              <p>Both. We teach online across Australia and worldwide, and in person in Perth, Western Australia, through private 1:1 lessons, small-group coaching or online sessions.</p>
+            </div>
           </div>
-          <div class="principle">
-            <span class="check">✓</span>
-            <h3>Expert oversight, always</h3>
-            <p>AI feedback is calibrated against qualified coach assessment, and the system knows when to bring in a human.</p>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">Do you cover Academic and General Training? <span class="plus">+</span></button>
+            <div class="faq-a">
+              <p>Yes, both modules are covered, with techniques specific to each, alongside mock tests scored to give you a realistic band estimate.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">What languages does the team speak? <span class="plus">+</span></button>
+            <div class="faq-a">
+              <p>English, Italian and Spanish, so you fully understand every concept and can implement strategies with confidence.</p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="block" id="who">
-      <div class="wrap">
-        <div class="section-head">
-          <h2>Who WA IELTS is for</h2>
-          <p>Built for people who need a specific score to move forward, not a casual English hobbyist.</p>
-        </div>
-        <div class="segments">
-          <div class="segment-card">
-            <h3>University admission</h3>
-            <p>Reach the score your course requires, with a plan built around your actual writing and speaking gaps.</p>
-          </div>
-          <div class="segment-card">
-            <h3>Migration &amp; visa requirements</h3>
-            <p>Prepare for a General Training score that supports your visa or skilled migration pathway.</p>
-          </div>
-          <div class="segment-card">
-            <h3>Career &amp; professional registration</h3>
-            <p>Meet the English requirements of professional bodies and employers with confidence.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="block" id="start">
+    <section class="block reveal">
       <div class="wrap">
         <div class="cta-band">
           <div>
-            <h2>Start where you are today</h2>
-            <p>Open the free practice app now, or talk to a WA IELTS Academy coach about a personalised programme.</p>
+            <h2>Ready to reach your target band?</h2>
+            <p>Join students who've trained with WA IELTS Academy. Book a free assessment to plan your fastest next step.</p>
           </div>
           <div class="row">
-            <a class="btn btn-on-dark" href="https://practice.waielts.com" target="_blank" rel="noopener">Start free practice</a>
-            <a class="btn btn-outline-on-dark" href="mailto:hello@waielts.com">Talk to WA IELTS Academy</a>
+            <a class="btn btn-on-dark" href="https://www.waieltsacademy.com.au/free-info-session" target="_blank" rel="noopener">Book free info session</a>
+            <a class="btn btn-outline-on-dark" href="https://api.whatsapp.com/send/?phone=61452025626&text&type=phone_number&app_absent=0" target="_blank" rel="noopener">Chat on WhatsApp</a>
           </div>
         </div>
       </div>
@@ -430,18 +608,87 @@
       <div class="footer-inner">
         <span>© <span id="year"></span> WA IELTS</span>
         <nav aria-label="Footer">
-          <a href="#ecosystem">Ecosystem</a>
-          <a href="#why">Why WA IELTS</a>
-          <a href="#how">How it works</a>
+          <a href="#programs">Programs</a>
+          <a href="#team">Team</a>
+          <a href="#pricing">Pricing</a>
           <a href="https://practice.waielts.com" target="_blank" rel="noopener">Practice app</a>
+          <a href="mailto:info@waieltsacademy.com.au">info@waieltsacademy.com.au</a>
         </nav>
       </div>
+      <p class="footer-meta">WA IELTS Academy is based in Perth, Western Australia, teaching online across Australia and worldwide. English, Italian and Spanish spoken.</p>
       <p class="footer-note">WA IELTS is an independent learning ecosystem and is not affiliated with, endorsed by, or connected to IELTS, British Council, IDP or Cambridge Assessment English, nor with WhatsApp or Meta. We never guarantee a specific test score.</p>
     </div>
   </footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Scroll-reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { threshold: 0.12 });
+      revealEls.forEach(el => io.observe(el));
+    } else {
+      revealEls.forEach(el => el.classList.add('in'));
+    }
+
+    // Scroll-spy nav
+    const navLinks = document.querySelectorAll('nav.primary a');
+    const sections = Array.from(navLinks).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    if ('IntersectionObserver' in window && sections.length) {
+      const spy = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const id = '#' + entry.target.id;
+          const link = document.querySelector(`nav.primary a[href="${id}"]`);
+          if (!link) return;
+          if (entry.isIntersecting) {
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-40% 0px -50% 0px' });
+      sections.forEach(s => spy.observe(s));
+    }
+
+    // Program tabs
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(b => b.setAttribute('aria-selected', 'false'));
+        btn.setAttribute('aria-selected', 'true');
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+      });
+    });
+
+    // Testimonial carousel
+    const testiCards = document.querySelectorAll('.testi-card');
+    const testiDots = document.querySelectorAll('.testi-dot');
+    let testiIndex = 0;
+    function showTesti(i) {
+      testiCards.forEach((c, idx) => c.classList.toggle('active', idx === i));
+      testiDots.forEach((d, idx) => d.setAttribute('aria-current', idx === i ? 'true' : 'false'));
+      testiIndex = i;
+    }
+    testiDots.forEach(dot => dot.addEventListener('click', () => showTesti(Number(dot.dataset.index))));
+    if (testiCards.length > 1) {
+      setInterval(() => showTesti((testiIndex + 1) % testiCards.length), 7000);
+    }
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        const answer = btn.nextElementSibling;
+        btn.setAttribute('aria-expanded', String(!expanded));
+        answer.style.maxHeight = expanded ? '0px' : answer.scrollHeight + 'px';
+      });
+    });
+    // Open first FAQ by default with correct height
+    const firstFaq = document.querySelector('.faq-q[aria-expanded="true"]');
+    if (firstFaq) { firstFaq.nextElementSibling.style.maxHeight = firstFaq.nextElementSibling.scrollHeight + 'px'; }
   </script>
 </body>
 </html>
