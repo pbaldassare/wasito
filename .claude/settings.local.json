@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add *)",
+      "Bash(git commit -q -m 'Rebuild as WA IELTS master-brand landing page *)",
+      "Bash(git push *)"
+    ]
+  }
+}

@@ -1,9 +1,11 @@
-# WA IELTS — New Website
+# WA IELTS
 
-Landing page statica per il centro ufficiale di test IELTS in Western Australia.
+Landing page del master brand WA IELTS, destinata a `www.waielts.com`.
 
-- `index.html`: pagina unica, HTML e CSS puri, senza dipendenze. Presenta date dei test, differenza tra Academic e General Training, processo di registrazione e FAQ.
+- `index.html`: pagina unica, HTML e CSS puri, senza dipendenze. Presenta la promessa di marca, il posizionamento rispetto a scuole tradizionali, marketplace di tutor, piattaforme di test-prep e assistenti AI generici, l'ecosistema dei prodotti con il relativo stato reale (Academy attiva, prodotti AI in sviluppo), i principi di apprendimento e i segmenti di pubblico.
+
+Contenuti basati sullo Strategic Blueprint v1.3 (17 agosto 2026) del founder, letto da Notion il 9 ottobre 2026.
 
 Per vederla in locale basta aprire `index.html` nel browser.
 
-> Nota: date, sede e dettagli di contatto nel markup sono segnaposto e vanno sostituiti con i dati reali del centro.
+> Nota: i link del bottone "Talk to WA IELTS Academy" e "Join the waitlist" sono segnaposto, da collegare alle destinazioni reali quando saranno definite.
