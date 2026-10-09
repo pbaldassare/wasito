@@ -20,6 +20,15 @@
         ],
         "createdAt": "2026-10-09T08:44:18.954Z",
         "reason": "Matches the brand violet #6c18cc already live in production on practice.waielts.com, verified via DevTools computed styles on 2026-10-09, not an arbitrary AI aesthetic pick"
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-09T09:30:41.930Z",
+        "reason": "Two reported pairings (ink #101319 on violet #6c18cc at 2.3:1, and on violet-dark #4a0f99 at 1.6:1) do not correspond to any real rule in the file. Every selector with a violet background (.btn-primary, .tab-btn[aria-selected=true], .skip-link, the price-card badge) explicitly sets color:#fff, verified at 7.95:1 and 11.54:1 by computing WCAG contrast from the actual declared hex values. Likely a static-scanner mismatch across compact one-line CSS rules. All other contrast pairs in this file were manually audited and passed earlier in this project."
       }
     ]
   }

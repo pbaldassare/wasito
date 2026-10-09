@@ -74,6 +74,36 @@
     nav.primary a.active { opacity: 1; border-color: var(--violet); }
     @media (max-width: 920px) { nav.primary { display: none; } }
 
+    .menu-toggle {
+      display: none; align-items: center; justify-content: center;
+      width: 2.75rem; height: 2.75rem; border-radius: 10px;
+      background: #fff; border: 1px solid var(--line); cursor: pointer; flex-shrink: 0;
+    }
+    .menu-toggle svg { width: 1.3rem; height: 1.3rem; }
+    @media (max-width: 920px) { .menu-toggle { display: inline-flex; } }
+
+    .mobile-nav {
+      display: none; position: fixed; inset: 0; z-index: 40;
+      background: rgba(16,19,25,0.35);
+    }
+    .mobile-nav.open { display: block; }
+    .mobile-nav-panel {
+      position: absolute; top: 0; right: 0; height: 100%; width: min(20rem, 85vw);
+      background: #fff; padding: 1.5rem; box-shadow: -8px 0 32px rgba(16,19,25,0.18);
+      display: flex; flex-direction: column; gap: 0.25rem;
+    }
+    .mobile-nav-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+    .mobile-nav-close {
+      width: 2.5rem; height: 2.5rem; border-radius: 10px; border: 1px solid var(--line);
+      background: #fff; display: grid; place-items: center; cursor: pointer;
+    }
+    .mobile-nav-close svg { width: 1.1rem; height: 1.1rem; }
+    .mobile-nav-panel a {
+      text-decoration: none; color: var(--ink); font-weight: 700; font-size: 1.05rem;
+      padding: 0.9rem 0.25rem; border-bottom: 1px solid var(--line);
+    }
+    .mobile-nav-panel .btn { margin-top: 1.25rem; }
+
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
       padding: 0.85rem 1.6rem; border-radius: 999px;
@@ -127,7 +157,6 @@
     /* Section generic */
     section.block { padding: 4.5rem 0; }
     .section-head { max-width: 42rem; margin-bottom: 2.5rem; }
-    .section-head .eyebrow-label { font-size: 0.82rem; font-weight: 700; color: var(--violet); margin: 0 0 0.5rem; }
     .section-head h2 { font-size: clamp(1.8rem, 3.2vw, 2.4rem); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 0.75rem; }
     .section-head p { color: var(--muted); font-size: 1.05rem; margin: 0; }
 
@@ -136,7 +165,8 @@
     @media (max-width: 900px) { .diff-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 540px) { .diff-grid { grid-template-columns: 1fr; } }
     .diff-card { border: 1px solid var(--line); border-radius: 20px; padding: 1.5rem; background: #fff; }
-    .diff-card .glyph { width: 2.6rem; height: 2.6rem; border-radius: 10px; background: var(--violet-tint); color: var(--violet); display: grid; place-items: center; font-weight: 800; margin-bottom: 1rem; font-size: 1.1rem; }
+    .diff-card .glyph { width: 2.6rem; height: 2.6rem; border-radius: 10px; background: var(--violet-tint); color: var(--violet); display: grid; place-items: center; font-weight: 800; margin-bottom: 1rem; }
+    .glyph svg { width: 1.3rem; height: 1.3rem; }
     .diff-card h3 { margin: 0 0 0.5rem; font-size: 1rem; font-weight: 700; }
     .diff-card p { margin: 0; font-size: 0.88rem; color: var(--muted); }
 
@@ -190,9 +220,18 @@
     .stars { color: var(--gold); font-size: 1.1rem; margin-bottom: 1rem; letter-spacing: 0.1em; }
     .testi-card blockquote { margin: 0 0 1.25rem; font-size: 1.1rem; font-weight: 600; line-height: 1.5; }
     .testi-card cite { font-style: normal; font-size: 0.88rem; color: var(--muted); font-weight: 600; }
-    .testi-nav { display: flex; justify-content: center; gap: 0.6rem; margin-top: 1.5rem; }
-    .testi-dot { width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--line); border: none; cursor: pointer; padding: 0; }
-    .testi-dot[aria-current="true"] { background: var(--violet); }
+    .testi-nav { display: flex; justify-content: center; align-items: center; gap: 0.2rem; margin-top: 1.25rem; }
+    .testi-dot {
+      width: 2.75rem; height: 2.75rem; display: grid; place-items: center;
+      background: transparent; border: none; cursor: pointer; padding: 0;
+    }
+    .testi-dot::after { content: ""; width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--line); }
+    .testi-dot[aria-current="true"]::after { background: var(--violet); }
+    .testi-pause {
+      width: 2.75rem; height: 2.75rem; border-radius: 50%; border: 1px solid var(--line);
+      background: #fff; cursor: pointer; display: grid; place-items: center; margin-left: 0.5rem;
+    }
+    .testi-pause svg { width: 1rem; height: 1rem; }
 
     /* Ecosystem */
     .eco-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1.25rem; }
@@ -202,7 +241,8 @@
     .status-live { background: rgba(21,184,153,0.15); color: var(--mint); }
     .eco-card.featured .status-live { background: rgba(21,184,153,0.22); color: #4be3c6; }
     .status-build { background: rgba(204,59,24,0.1); color: var(--coral); }
-    .eco-card .glyph { width: 2.75rem; height: 2.75rem; border-radius: 12px; background: var(--violet-tint); color: var(--violet); display: grid; place-items: center; font-weight: 800; font-size: 1.2rem; margin-bottom: 1.1rem; }
+    .eco-card .glyph { width: 2.75rem; height: 2.75rem; border-radius: 12px; background: var(--violet-tint); color: var(--violet); display: grid; place-items: center; font-weight: 800; margin-bottom: 1.1rem; }
+    .eco-card .glyph svg { width: 1.4rem; height: 1.4rem; }
     .eco-card.featured .glyph { background: rgba(255,255,255,0.12); color: #fff; }
     .eco-card h3 { margin: 0 0 0.5rem; font-size: 1.08rem; font-weight: 700; padding-right: 4rem; }
     .eco-card p { margin: 0 0 1rem; font-size: 0.92rem; color: var(--muted); }
@@ -260,8 +300,28 @@
         <a href="#ecosystem">Ecosystem</a>
       </nav>
       <a class="btn btn-primary btn-sm" href="https://www.waieltsacademy.com.au/free-info-session" target="_blank" rel="noopener">Book free info session</a>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
     </div>
   </header>
+
+  <div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-panel" role="dialog" aria-modal="true" aria-label="Site navigation">
+      <div class="mobile-nav-head">
+        <span class="wordmark">WA <b>IELTS</b></span>
+        <button class="mobile-nav-close" id="menuClose" aria-label="Close menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <a href="#programs">Programs</a>
+      <a href="#team">Team</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#ecosystem">Ecosystem</a>
+      <a class="btn btn-primary" href="https://www.waieltsacademy.com.au/free-info-session" target="_blank" rel="noopener">Book free info session</a>
+    </div>
+  </div>
 
   <main id="main">
     <section class="hero">
@@ -301,22 +361,22 @@
         </div>
         <div class="diff-grid">
           <div class="diff-card">
-            <div class="glyph">🎯</div>
+            <div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.6" fill="currentColor" stroke="none"/></svg></div>
             <h3>Personalised diagnostic assessment</h3>
             <p>We identify your level and design a clear path to your target score.</p>
           </div>
           <div class="diff-card">
-            <div class="glyph">📝</div>
+            <div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div>
             <h3>Real IELTS practice</h3>
             <p>Mock tests and exam simulations with detailed, actionable feedback.</p>
           </div>
           <div class="diff-card">
-            <div class="glyph">🕐</div>
+            <div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v4.5l3 2"/></svg></div>
             <h3>Flexible learning</h3>
             <p>Study online or face-to-face in Perth, on your own schedule.</p>
           </div>
           <div class="diff-card">
-            <div class="glyph">💬</div>
+            <div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4v-4H6a2 2 0 0 1-2-2V6Z"/></svg></div>
             <h3>Confidence-driven coaching</h3>
             <p>We build not only your score, but your ability to communicate in real life.</p>
           </div>
@@ -331,12 +391,12 @@
           <p>IELTS is a strategic exam. We train exam technique alongside real English ability, for both Academic and General Training.</p>
         </div>
         <div class="tabs" role="tablist" aria-label="IELTS skills">
-          <button class="tab-btn" role="tab" aria-selected="true" data-tab="listening">Listening</button>
-          <button class="tab-btn" role="tab" aria-selected="false" data-tab="reading">Reading</button>
-          <button class="tab-btn" role="tab" aria-selected="false" data-tab="writing">Writing</button>
-          <button class="tab-btn" role="tab" aria-selected="false" data-tab="speaking">Speaking</button>
+          <button class="tab-btn" id="tab-listening" role="tab" aria-selected="true" aria-controls="panel-listening" tabindex="0" data-tab="listening">Listening</button>
+          <button class="tab-btn" id="tab-reading" role="tab" aria-selected="false" aria-controls="panel-reading" tabindex="-1" data-tab="reading">Reading</button>
+          <button class="tab-btn" id="tab-writing" role="tab" aria-selected="false" aria-controls="panel-writing" tabindex="-1" data-tab="writing">Writing</button>
+          <button class="tab-btn" id="tab-speaking" role="tab" aria-selected="false" aria-controls="panel-speaking" tabindex="-1" data-tab="speaking">Speaking</button>
         </div>
-        <div class="tab-panel active" id="panel-listening" role="tabpanel">
+        <div class="tab-panel active" id="panel-listening" role="tabpanel" aria-labelledby="tab-listening" tabindex="0">
           <h3>Listening</h3>
           <ul>
             <li>Strategies for every question type</li>
@@ -344,7 +404,7 @@
             <li>Accent training: UK, US, Australia and more</li>
           </ul>
         </div>
-        <div class="tab-panel" id="panel-reading" role="tabpanel">
+        <div class="tab-panel" id="panel-reading" role="tabpanel" aria-labelledby="tab-reading" tabindex="0">
           <h3>Reading</h3>
           <ul>
             <li>Academic and General Training techniques</li>
@@ -352,7 +412,7 @@
             <li>Spotting traps and distractors</li>
           </ul>
         </div>
-        <div class="tab-panel" id="panel-writing" role="tabpanel">
+        <div class="tab-panel" id="panel-writing" role="tabpanel" aria-labelledby="tab-writing" tabindex="0">
           <h3>Writing</h3>
           <ul>
             <li>Task 1 (charts, letters) and Task 2 (essay) breakdown</li>
@@ -360,7 +420,7 @@
             <li>Personalised feedback with band estimates and next steps</li>
           </ul>
         </div>
-        <div class="tab-panel" id="panel-speaking" role="tabpanel">
+        <div class="tab-panel" id="panel-speaking" role="tabpanel" aria-labelledby="tab-speaking" tabindex="0">
           <h3>Speaking</h3>
           <ul>
             <li>Fluency, coherence and pronunciation coaching</li>
@@ -498,6 +558,9 @@
             <button class="testi-dot" aria-current="true" data-index="0" aria-label="Review 1"></button>
             <button class="testi-dot" data-index="1" aria-label="Review 2"></button>
             <button class="testi-dot" data-index="2" aria-label="Review 3"></button>
+            <button class="testi-pause" id="testiPause" aria-label="Pause automatic rotation" aria-pressed="false">
+              <svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+            </button>
           </div>
         </div>
       </div>
@@ -512,39 +575,39 @@
         <div class="eco-grid">
           <div class="eco-card featured">
             <span class="status status-live">Live</span>
-            <div class="glyph">👩‍🏫</div>
+            <div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3.1-6.5 7-6.5s7 2.5 7 6.5"/></svg></div>
             <h3>WA IELTS Academy</h3>
             <p>Expert human coaching: one-to-one sessions, memberships, mock testing and essay evaluation.</p>
             <a class="link" href="https://www.waieltsacademy.com.au/free-info-session" target="_blank" rel="noopener">Book a session →</a>
           </div>
           <div class="eco-card featured">
             <span class="status status-live">Live</span>
-            <div class="glyph">🧭</div>
+            <div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M15 9l-2 6-6 2 2-6 6-2Z"/></svg></div>
             <h3>WA IELTS Practice</h3>
             <p>Free diagnostics and exercises that show you where you stand and what to work on first.</p>
             <a class="link" href="https://practice.waielts.com" target="_blank" rel="noopener">Open the app →</a>
           </div>
           <div class="eco-card">
             <span class="status status-build">Building</span>
-            <div class="glyph">✍️</div>
+            <div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1-4L16 5l3 3L8 19l-4 1Z"/><path d="M14 7l3 3"/></svg></div>
             <h3>WA IELTS Writing</h3>
             <p>AI-assisted feedback on your writing, reviewed against coach-defined rubrics, with human oversight.</p>
           </div>
           <div class="eco-card">
             <span class="status status-build">Building</span>
-            <div class="glyph">🗣️</div>
+            <div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"/></svg></div>
             <h3>WA IELTS Speaking</h3>
             <p>Structured AI speaking practice built on the same method our coaches use in sessions.</p>
           </div>
           <div class="eco-card">
             <span class="status status-build">Building</span>
-            <div class="glyph">📈</div>
+            <div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l5-6 4 3 7-8"/><path d="M15 6h5v5"/></svg></div>
             <h3>WA IELTS Journey</h3>
             <p>A personalised learning pathway that tracks progress toward your target score over time.</p>
           </div>
           <div class="eco-card">
             <span class="status status-build">Building</span>
-            <div class="glyph">🤝</div>
+            <div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 15l6-6"/><path d="M8 13l-2 2a3.5 3.5 0 0 0 5 5l2-2"/><path d="M16 11l2-2a3.5 3.5 0 0 0-5-5l-2 2"/></svg></div>
             <h3>WA IELTS for Partners</h3>
             <p>Solutions for migration agencies, education agents and universities supporting their students.</p>
           </div>
@@ -639,47 +702,103 @@
       revealEls.forEach(el => el.classList.add('in'));
     }
 
-    // Scroll-spy nav
-    const navLinks = document.querySelectorAll('nav.primary a');
-    const sections = Array.from(navLinks).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    // Scroll-spy nav: track every section's intersection ratio and activate
+    // whichever is currently most visible, instead of reacting to each
+    // intersecting entry independently (which could activate an early
+    // section while the page was still showing the hero above it).
+    const navLinks = document.querySelectorAll('nav.primary a, .mobile-nav-panel a[href^="#"]');
+    const sectionIds = Array.from(document.querySelectorAll('nav.primary a'))
+      .map(a => a.getAttribute('href'))
+      .filter(h => h && h.startsWith('#'));
+    const sections = sectionIds.map(id => document.querySelector(id)).filter(Boolean);
     if ('IntersectionObserver' in window && sections.length) {
+      const ratios = new Map();
       const spy = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          const id = '#' + entry.target.id;
-          const link = document.querySelector(`nav.primary a[href="${id}"]`);
-          if (!link) return;
-          if (entry.isIntersecting) {
-            navLinks.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-          }
-        });
-      }, { rootMargin: '-40% 0px -50% 0px' });
+        entries.forEach(entry => { ratios.set(entry.target.id, entry.isIntersecting ? entry.intersectionRatio : 0); });
+        let bestId = null, bestRatio = 0;
+        ratios.forEach((ratio, id) => { if (ratio > bestRatio) { bestRatio = ratio; bestId = id; } });
+        navLinks.forEach(l => l.classList.toggle('active', bestId && l.getAttribute('href') === '#' + bestId));
+      }, { rootMargin: '-15% 0px -70% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] });
       sections.forEach(s => spy.observe(s));
     }
 
-    // Program tabs
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    tabBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        tabBtns.forEach(b => b.setAttribute('aria-selected', 'false'));
-        btn.setAttribute('aria-selected', 'true');
-        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-        document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+    // Mobile nav
+    const menuToggle = document.getElementById('menuToggle');
+    const menuClose = document.getElementById('menuClose');
+    const mobileNav = document.getElementById('mobileNav');
+    function openMenu() {
+      mobileNav.classList.add('open');
+      menuToggle.setAttribute('aria-expanded', 'true');
+      menuClose.focus();
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      mobileNav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.focus();
+      document.body.style.overflow = '';
+    }
+    menuToggle.addEventListener('click', openMenu);
+    menuClose.addEventListener('click', closeMenu);
+    mobileNav.addEventListener('click', (e) => { if (e.target === mobileNav) closeMenu(); });
+    mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && mobileNav.classList.contains('open')) closeMenu(); });
+
+    // Program tabs: click + full ARIA Tabs keyboard pattern (arrow keys, Home/End)
+    const tabBtns = Array.from(document.querySelectorAll('.tab-btn'));
+    function activateTab(btn) {
+      tabBtns.forEach(b => { b.setAttribute('aria-selected', 'false'); b.tabIndex = -1; });
+      btn.setAttribute('aria-selected', 'true');
+      btn.tabIndex = 0;
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+    }
+    tabBtns.forEach((btn, i) => {
+      btn.addEventListener('click', () => activateTab(btn));
+      btn.addEventListener('keydown', (e) => {
+        let next = null;
+        if (e.key === 'ArrowRight') next = tabBtns[(i + 1) % tabBtns.length];
+        else if (e.key === 'ArrowLeft') next = tabBtns[(i - 1 + tabBtns.length) % tabBtns.length];
+        else if (e.key === 'Home') next = tabBtns[0];
+        else if (e.key === 'End') next = tabBtns[tabBtns.length - 1];
+        if (next) { e.preventDefault(); next.focus(); activateTab(next); }
       });
     });
 
-    // Testimonial carousel
+    // Testimonial carousel, with a play/pause control (WCAG 2.2.2) and
+    // auto-pause while hovered or focused so a reader isn't interrupted.
     const testiCards = document.querySelectorAll('.testi-card');
     const testiDots = document.querySelectorAll('.testi-dot');
+    const testiWrap = document.querySelector('.testi-wrap');
+    const testiPause = document.getElementById('testiPause');
     let testiIndex = 0;
+    let testiTimer = null;
+    let testiPlaying = true;
     function showTesti(i) {
       testiCards.forEach((c, idx) => c.classList.toggle('active', idx === i));
       testiDots.forEach((d, idx) => d.setAttribute('aria-current', idx === i ? 'true' : 'false'));
       testiIndex = i;
     }
-    testiDots.forEach(dot => dot.addEventListener('click', () => showTesti(Number(dot.dataset.index))));
+    function startTesti() { stopTesti(); testiTimer = setInterval(() => showTesti((testiIndex + 1) % testiCards.length), 7000); }
+    function stopTesti() { if (testiTimer) { clearInterval(testiTimer); testiTimer = null; } }
+    testiDots.forEach(dot => dot.addEventListener('click', () => { showTesti(Number(dot.dataset.index)); if (testiPlaying) startTesti(); }));
     if (testiCards.length > 1) {
-      setInterval(() => showTesti((testiIndex + 1) % testiCards.length), 7000);
+      startTesti();
+      testiWrap.addEventListener('mouseenter', stopTesti);
+      testiWrap.addEventListener('mouseleave', () => { if (testiPlaying) startTesti(); });
+      testiWrap.addEventListener('focusin', stopTesti);
+      testiWrap.addEventListener('focusout', () => { if (testiPlaying) startTesti(); });
+      testiPause.addEventListener('click', () => {
+        testiPlaying = !testiPlaying;
+        testiPause.setAttribute('aria-pressed', String(!testiPlaying));
+        testiPause.setAttribute('aria-label', testiPlaying ? 'Pause automatic rotation' : 'Resume automatic rotation');
+        testiPause.innerHTML = testiPlaying
+          ? '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>'
+          : '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5l12 7-12 7Z"/></svg>';
+        if (testiPlaying) startTesti(); else stopTesti();
+      });
+    } else {
+      testiPause.style.display = 'none';
     }
 
     // FAQ accordion (animates grid-template-rows, not height/max-height)
