@@ -208,11 +208,15 @@
 
     /* Pricing */
     .pricing { background: var(--violet-tint); }
+    .price-group-label { font-size: 1rem; font-weight: 700; margin: 2.25rem 0 1rem; }
+    .price-group-label:first-of-type { margin-top: 0; }
+    .inline-link { color: var(--violet); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
     .price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.1rem; }
+    .price-grid-1 { max-width: 20rem; }
     .price-card { background: #fff; border: 1px solid #e3d4f6; border-radius: 22px; padding: 1.6rem; display: flex; flex-direction: column; }
     .price-card.highlight { border: 2px solid var(--violet); position: relative; }
     .price-card .badge { position: absolute; top: -0.7rem; left: 1.5rem; background: var(--violet); color: #fff; font-size: 0.7rem; font-weight: 700; padding: 0.25rem 0.7rem; border-radius: 999px; }
-    .price-card h3 { margin: 0 0 0.5rem; font-size: 1.02rem; font-weight: 700; }
+    .price-card h4 { margin: 0 0 0.5rem; font-size: 1.02rem; font-weight: 700; }
     .price-card .amount { font-size: 1.9rem; font-weight: 800; margin-bottom: 0.1rem; }
     .price-card .amount small { font-size: 0.85rem; font-weight: 600; color: var(--muted); }
     .price-card .fee { font-size: 0.78rem; color: var(--muted); margin-bottom: 1rem; }
@@ -506,51 +510,61 @@
       <div class="wrap">
         <div class="section-head">
           <h2>Packages built around your goal</h2>
-          <p>All prices in AUD. Choose the pace and intensity that fits your timeline.</p>
+          <p>All prices in AUD, grouped by how much you want to commit up front. Not sure which fits? <a class="inline-link" href="https://www.waieltsacademy.com.au/free-info-session" target="_blank" rel="noopener">Book a free session</a> and we'll help you pick.</p>
         </div>
-        <div class="price-grid">
-          <div class="price-card highlight">
-            <span class="badge">Most popular</span>
-            <h3>IELTS Accelerate 1:1</h3>
-            <div class="amount">A$797</div>
-            <div class="fee">+ A$35 set-up fee · 10 hours · valid 3 months</div>
-            <p class="desc">10 hours of expert 1:1 coaching across all 4 modules, from solid foundations to exam-ready.</p>
-            <a class="btn btn-primary btn-sm" href="https://www.waieltsacademy.com.au/pricing-plans/list" target="_blank" rel="noopener">Select</a>
-          </div>
+
+        <h3 class="price-group-label">Try it first, no commitment</h3>
+        <div class="price-grid price-grid-1">
           <div class="price-card">
-            <h3>3 Months IELTS Journey</h3>
-            <div class="amount">A$150<small>/week</small></div>
-            <div class="fee">+ A$30 set-up fee · valid 12 weeks</div>
-            <p class="desc">Commit to 3 months, become part of the family and get exam-ready the steady way.</p>
-            <a class="btn btn-ghost btn-sm" href="https://www.waieltsacademy.com.au/pricing-plans/list" target="_blank" rel="noopener">Select</a>
+            <h4>Private 1:1 class</h4>
+            <div class="amount">From A$97</div>
+            <div class="fee">1-2 hours, pay as you go</div>
+            <p class="desc">A single tailored session targeting your individual strengths and gaps.</p>
+            <a class="btn btn-ghost btn-sm" href="https://www.waieltsacademy.com.au/private-lessons" target="_blank" rel="noopener">Select</a>
           </div>
+        </div>
+
+        <h3 class="price-group-label">Weekly coaching</h3>
+        <div class="price-grid price-grid-3">
           <div class="price-card">
-            <h3>1:1 IELTS/PTE weekly membership</h3>
+            <h4>1:1 IELTS/PTE weekly membership</h4>
             <div class="amount">A$167<small>/week</small></div>
             <div class="fee">+ A$25 set-up fee · 2 meetings/week</div>
             <p class="desc">Personalised attention with your coach, all materials and AI tools included.</p>
             <a class="btn btn-ghost btn-sm" href="https://www.waieltsacademy.com.au/pricing-plans/list" target="_blank" rel="noopener">Select</a>
           </div>
           <div class="price-card">
-            <h3>General English weekly membership</h3>
+            <h4>Writing &amp; speaking skills</h4>
+            <div class="amount">A$197<small>/week</small></div>
+            <div class="fee">+ A$7 joining fee · 4-week minimum</div>
+            <p class="desc">Unlimited writing submissions for feedback, plus speaking practice.</p>
+            <a class="btn btn-ghost btn-sm" href="https://www.waieltsacademy.com.au/pricing-plans/list" target="_blank" rel="noopener">Select</a>
+          </div>
+          <div class="price-card">
+            <h4>General English weekly membership</h4>
             <div class="amount">A$350<small>/week</small></div>
             <div class="fee">2 coaching meetings + conversation &amp; grammar classes</div>
             <p class="desc">Blends grammar, vocabulary growth and IELTS strategy for students improving overall English.</p>
             <a class="btn btn-ghost btn-sm" href="https://www.waieltsacademy.com.au/pricing-plans/list" target="_blank" rel="noopener">Select</a>
           </div>
-          <div class="price-card">
-            <h3>Writing &amp; speaking skills</h3>
-            <div class="amount">A$197<small>/week</small></div>
-            <div class="fee">+ A$7 joining fee · 4-week minimum</div>
-            <p class="desc">Unlimited writing submissions for feedback, plus speaking practice, for students focused on productive skills.</p>
-            <a class="btn btn-ghost btn-sm" href="https://www.waieltsacademy.com.au/pricing-plans/list" target="_blank" rel="noopener">Select</a>
+        </div>
+
+        <h3 class="price-group-label">Structured programs</h3>
+        <div class="price-grid price-grid-2">
+          <div class="price-card highlight">
+            <span class="badge">Most popular</span>
+            <h4>IELTS Accelerate 1:1</h4>
+            <div class="amount">A$797</div>
+            <div class="fee">+ A$35 set-up fee · 10 hours · valid 3 months</div>
+            <p class="desc">10 hours of expert 1:1 coaching across all 4 modules, from solid foundations to exam-ready.</p>
+            <a class="btn btn-primary btn-sm" href="https://www.waieltsacademy.com.au/pricing-plans/list" target="_blank" rel="noopener">Select</a>
           </div>
           <div class="price-card">
-            <h3>Private 1:1 class</h3>
-            <div class="amount">From A$97</div>
-            <div class="fee">1-2 hours, pay as you go</div>
-            <p class="desc">A single tailored session targeting your individual strengths and gaps, no commitment required.</p>
-            <a class="btn btn-ghost btn-sm" href="https://www.waieltsacademy.com.au/private-lessons" target="_blank" rel="noopener">Select</a>
+            <h4>3 Months IELTS Journey</h4>
+            <div class="amount">A$150<small>/week</small></div>
+            <div class="fee">+ A$30 set-up fee · valid 12 weeks</div>
+            <p class="desc">Commit to 3 months, become part of the family and get exam-ready the steady way.</p>
+            <a class="btn btn-ghost btn-sm" href="https://www.waieltsacademy.com.au/pricing-plans/list" target="_blank" rel="noopener">Select</a>
           </div>
         </div>
       </div>
