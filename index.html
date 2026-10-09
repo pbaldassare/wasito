@@ -219,7 +219,12 @@
     }
     .faq-q .plus { font-size: 1.4rem; color: var(--violet); flex-shrink: 0; transition: transform 0.25s ease; }
     .faq-q[aria-expanded="true"] .plus { transform: rotate(45deg); }
-    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .faq-a {
+      display: grid; grid-template-rows: 0fr;
+      transition: grid-template-rows 0.3s ease;
+    }
+    .faq-a.open { grid-template-rows: 1fr; }
+    .faq-a > div { overflow: hidden; min-height: 0; }
     .faq-a p { margin: 0 0 1.25rem; color: var(--muted); font-size: 0.95rem; max-width: 42rem; }
 
     /* CTA band */
@@ -555,33 +560,33 @@
         <div class="faq-list">
           <div class="faq-item">
             <button class="faq-q" aria-expanded="true">What is IELTS, exactly? <span class="plus">+</span></button>
-            <div class="faq-a" style="max-height: 10rem;">
+            <div class="faq-a open"><div>
               <p>The International English Language Testing System is the world's most widely recognised English proficiency exam, trusted by governments, universities and employers in Australia, the UK, Canada and New Zealand. It assesses Listening, Reading, Writing and Speaking.</p>
-            </div>
+            </div></div>
           </div>
           <div class="faq-item">
             <button class="faq-q" aria-expanded="false">Why do I need coaching if my English is already good? <span class="plus">+</span></button>
-            <div class="faq-a">
+            <div class="faq-a"><div>
               <p>IELTS is not just an English test, it's a strategic exam. Many candidates with good English struggle to reach their target score because they're unfamiliar with the exam structure, timing and specific expectations required to achieve a high band.</p>
-            </div>
+            </div></div>
           </div>
           <div class="faq-item">
             <button class="faq-q" aria-expanded="false">Can I study online, or only in person? <span class="plus">+</span></button>
-            <div class="faq-a">
+            <div class="faq-a"><div>
               <p>Both. We teach online across Australia and worldwide, and in person in Perth, Western Australia, through private 1:1 lessons, small-group coaching or online sessions.</p>
-            </div>
+            </div></div>
           </div>
           <div class="faq-item">
             <button class="faq-q" aria-expanded="false">Do you cover Academic and General Training? <span class="plus">+</span></button>
-            <div class="faq-a">
+            <div class="faq-a"><div>
               <p>Yes, both modules are covered, with techniques specific to each, alongside mock tests scored to give you a realistic band estimate.</p>
-            </div>
+            </div></div>
           </div>
           <div class="faq-item">
             <button class="faq-q" aria-expanded="false">What languages does the team speak? <span class="plus">+</span></button>
-            <div class="faq-a">
+            <div class="faq-a"><div>
               <p>English, Italian and Spanish, so you fully understand every concept and can implement strategies with confidence.</p>
-            </div>
+            </div></div>
           </div>
         </div>
       </div>
@@ -677,18 +682,15 @@
       setInterval(() => showTesti((testiIndex + 1) % testiCards.length), 7000);
     }
 
-    // FAQ accordion
+    // FAQ accordion (animates grid-template-rows, not height/max-height)
     document.querySelectorAll('.faq-q').forEach(btn => {
       btn.addEventListener('click', () => {
         const expanded = btn.getAttribute('aria-expanded') === 'true';
         const answer = btn.nextElementSibling;
         btn.setAttribute('aria-expanded', String(!expanded));
-        answer.style.maxHeight = expanded ? '0px' : answer.scrollHeight + 'px';
+        answer.classList.toggle('open', !expanded);
       });
     });
-    // Open first FAQ by default with correct height
-    const firstFaq = document.querySelector('.faq-q[aria-expanded="true"]');
-    if (firstFaq) { firstFaq.nextElementSibling.style.maxHeight = firstFaq.nextElementSibling.scrollHeight + 'px'; }
   </script>
 </body>
 </html>
