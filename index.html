@@ -68,16 +68,38 @@
       font-weight: 800; font-size: 1.35rem; letter-spacing: -0.01em;
       color: var(--violet);
     }
-    nav.primary { display: flex; align-items: center; gap: 0.3rem; }
-    nav.primary a {
-      display: flex; align-items: center; gap: 0.45rem;
+    nav.primary { display: flex; align-items: center; gap: 0.2rem; }
+    .nav-item { position: relative; }
+    nav.primary a, .nav-trigger {
+      display: flex; align-items: center; gap: 0.4rem;
       text-decoration: none; color: var(--muted); font-size: 0.92rem; font-weight: 600;
       padding: 0.55rem 1rem; border-radius: 999px;
+      background: none; border: none; cursor: pointer; font-family: inherit;
     }
-    nav.primary a svg { width: 1.05rem; height: 1.05rem; flex-shrink: 0; }
-    nav.primary a:hover { background: var(--violet-tint); color: var(--ink); }
-    nav.primary a.active { background: var(--violet); color: #fff; }
+    nav.primary a svg, .nav-trigger > svg { width: 1.05rem; height: 1.05rem; flex-shrink: 0; }
+    nav.primary a:hover, .nav-trigger:hover { background: var(--violet-tint); color: var(--ink); }
+    nav.primary a.active, .nav-trigger.active { background: var(--violet); color: #fff; }
+    .nav-trigger .chevron { width: 0.8rem; height: 0.8rem; flex-shrink: 0; transition: transform 0.15s ease; }
+    .nav-item.open .nav-trigger .chevron { transform: rotate(180deg); }
     @media (max-width: 1080px) { nav.primary { display: none; } }
+
+    .nav-dropdown {
+      display: none; position: absolute; top: calc(100% + 0.5rem); left: 0;
+      min-width: 13rem; background: #fff; border: 1px solid var(--line); border-radius: 16px;
+      padding: 0.5rem; z-index: 10;
+    }
+    .nav-item.open .nav-dropdown { display: block; }
+    .nav-dropdown a, .nav-dropdown .soon {
+      display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;
+      text-decoration: none; color: var(--ink); font-size: 0.92rem; font-weight: 600;
+      padding: 0.6rem 0.75rem; border-radius: 10px;
+    }
+    .nav-dropdown a:hover, .nav-dropdown a:focus-visible { background: var(--violet-tint); }
+    .nav-dropdown .soon { color: var(--muted); cursor: default; }
+    .soon-badge {
+      font-size: 0.72rem; font-weight: 700; color: var(--coral); background: rgba(204,59,24,0.1);
+      padding: 0.15rem 0.5rem; border-radius: 999px; flex-shrink: 0;
+    }
 
     .menu-toggle {
       display: none; align-items: center; justify-content: center;
@@ -103,12 +125,22 @@
       background: #fff; display: grid; place-items: center; cursor: pointer;
     }
     .mobile-nav-close svg { width: 1.1rem; height: 1.1rem; }
-    .mobile-nav-panel a {
+    .mobile-nav-panel a:not(.btn), .mobile-nav-panel .mobile-group-trigger {
       display: flex; align-items: center; gap: 0.75rem;
       text-decoration: none; color: var(--ink); font-weight: 700; font-size: 1.05rem;
       padding: 0.9rem 0.25rem; border-bottom: 1px solid var(--line);
+      background: none; border-top: none; border-left: none; border-right: none;
+      width: 100%; text-align: left; cursor: pointer; font-family: inherit;
     }
-    .mobile-nav-panel a svg { width: 1.2rem; height: 1.2rem; flex-shrink: 0; color: var(--violet); }
+    .mobile-nav-panel a svg, .mobile-group-trigger > svg { width: 1.2rem; height: 1.2rem; flex-shrink: 0; color: var(--violet); }
+    .mobile-group-trigger .chevron { width: 0.9rem; height: 0.9rem; margin-left: auto; transition: transform 0.15s ease; }
+    .mobile-group.open .mobile-group-trigger .chevron { transform: rotate(180deg); }
+    .mobile-group-list { display: none; padding: 0 0 0.5rem 2rem; }
+    .mobile-group.open .mobile-group-list { display: block; }
+    .mobile-group-list a {
+      border-bottom: none; font-weight: 600; font-size: 0.96rem; color: var(--muted); padding: 0.6rem 0.25rem;
+    }
+    .mobile-group-list .soon { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 0.25rem; color: var(--muted); font-size: 0.96rem; font-weight: 600; }
     .mobile-nav-panel .btn { margin-top: 1.25rem; }
 
     .btn {
@@ -122,6 +154,8 @@
     .btn-primary:hover { background: var(--violet-dark); }
     .btn-ghost { background: #fff; color: var(--ink); border-color: var(--line); }
     .btn-ghost:hover { border-color: var(--violet); }
+    .btn-outline-violet { background: transparent; color: var(--violet); border-color: var(--violet); }
+    .btn-outline-violet:hover { background: var(--violet-tint); }
     .btn-on-dark { background: #fff; color: var(--violet-deep); }
     .btn-outline-on-dark { background: transparent; color: #fff; border-color: rgba(255,255,255,0.4); }
 
@@ -192,6 +226,16 @@
     .glyph svg { width: 1.3rem; height: 1.3rem; }
     .diff-card h3 { margin: 0 0 0.5rem; font-size: 1rem; font-weight: 700; }
     .diff-card p { margin: 0; font-size: 0.88rem; color: var(--muted); }
+
+    /* About: purpose, vision, mission */
+    .about { background: var(--ink); color: #fff; }
+    .about .section-head h2, .about .section-head p { color: #fff; }
+    .about .section-head p { opacity: 0.7; }
+    .about-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
+    @media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; } }
+    .about-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); border-radius: 20px; padding: 1.75rem; scroll-margin-top: 6rem; }
+    .about-card h3 { margin: 0 0 0.75rem; font-size: 1.1rem; font-weight: 800; }
+    .about-card p { margin: 0; font-size: 0.95rem; line-height: 1.6; color: rgba(255,255,255,0.78); }
 
     /* Program tabs */
     .program { background: var(--violet-tint); }
@@ -321,13 +365,45 @@
     <div class="wrap topbar-inner">
       <a class="wordmark-box" href="#main"><span class="wordmark">WA IELTS.</span></a>
       <nav class="primary" aria-label="Primary">
-        <a href="#programs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5c2-1 5-1 8 0v14c-3-1-6-1-8 0V5Z"/><path d="M20 5c-2-1-5-1-8 0v14c3-1 6-1 8 0V5Z"/></svg>Programs</a>
-        <a href="#team"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3.1-6.5 7-6.5s7 2.5 7 6.5"/></svg>Team</a>
-        <a href="#pricing"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2h7a1 1 0 0 1 1 1v7L11 19 3 11 12 2Z"/><circle cx="15.3" cy="7.7" r="1.2" fill="currentColor" stroke="none"/></svg>Pricing</a>
-        <a href="#reviews"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.1-5.4 3.1 1.3-6-4.6-4.1 6.1-.6L12 3Z"/></svg>Reviews</a>
-        <a href="#ecosystem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>Ecosystem</a>
+        <div class="nav-item" data-sections="about team">
+          <button class="nav-trigger" aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6"/><path d="M5 10v9M19 10v9M9 10v9M15 10v9"/><path d="M3 19h18"/></svg>
+            About us
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="nav-dropdown" role="menu">
+            <a href="#purpose" role="menuitem">Purpose</a>
+            <a href="#vision" role="menuitem">Vision</a>
+            <a href="#mission" role="menuitem">Mission</a>
+            <a href="#team" role="menuitem">Team</a>
+          </div>
+        </div>
+        <div class="nav-item" data-sections="programs pricing">
+          <button class="nav-trigger" aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5c2-1 5-1 8 0v14c-3-1-6-1-8 0V5Z"/><path d="M20 5c-2-1-5-1-8 0v14c3-1 6-1 8 0V5Z"/></svg>
+            Education
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="nav-dropdown" role="menu">
+            <a href="#programs" role="menuitem">Coaching</a>
+            <a href="https://practice.waielts.com" target="_blank" rel="noopener" role="menuitem">Practice</a>
+            <span class="soon" role="menuitem" aria-disabled="true">Masterclass <span class="soon-badge">Coming soon</span></span>
+            <a href="#pricing" role="menuitem">Packages</a>
+          </div>
+        </div>
+        <div class="nav-item" data-sections="ecosystem">
+          <button class="nav-trigger" aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>
+            Ecosystem
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="nav-dropdown" role="menu">
+            <span class="soon" role="menuitem" aria-disabled="true">ELE <span class="soon-badge">Coming soon</span></span>
+          </div>
+        </div>
+        <a href="#faq" data-sections="faq"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.4 2.33c-.9.33-1.4 1.02-1.4 1.92v.25"/><circle cx="12" cy="17" r="0.6" fill="currentColor" stroke="none"/></svg>FAQ</a>
       </nav>
-      <a class="btn btn-primary btn-sm" href="https://www.waieltsacademy.com.au/free-info-session" target="_blank" rel="noopener">Book free info session</a>
+      <a class="btn btn-outline-violet btn-sm" href="https://www.waieltsacademy.com.au/free-info-session" target="_blank" rel="noopener">Book free info session</a>
       <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
       </button>
@@ -342,12 +418,48 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
         </button>
       </div>
-      <a href="#programs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5c2-1 5-1 8 0v14c-3-1-6-1-8 0V5Z"/><path d="M20 5c-2-1-5-1-8 0v14c3-1 6-1 8 0V5Z"/></svg>Programs</a>
-      <a href="#team"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3.1-6.5 7-6.5s7 2.5 7 6.5"/></svg>Team</a>
-      <a href="#pricing"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2h7a1 1 0 0 1 1 1v7L11 19 3 11 12 2Z"/><circle cx="15.3" cy="7.7" r="1.2" fill="currentColor" stroke="none"/></svg>Pricing</a>
-      <a href="#reviews"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.1-5.4 3.1 1.3-6-4.6-4.1 6.1-.6L12 3Z"/></svg>Reviews</a>
-      <a href="#ecosystem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>Ecosystem</a>
-      <a class="btn btn-primary" href="https://www.waieltsacademy.com.au/free-info-session" target="_blank" rel="noopener">Book free info session</a>
+
+      <div class="mobile-group">
+        <button class="mobile-group-trigger">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6"/><path d="M5 10v9M19 10v9M9 10v9M15 10v9"/><path d="M3 19h18"/></svg>
+          About us
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="mobile-group-list">
+          <a href="#purpose">Purpose</a>
+          <a href="#vision">Vision</a>
+          <a href="#mission">Mission</a>
+          <a href="#team">Team</a>
+        </div>
+      </div>
+
+      <div class="mobile-group">
+        <button class="mobile-group-trigger">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5c2-1 5-1 8 0v14c-3-1-6-1-8 0V5Z"/><path d="M20 5c-2-1-5-1-8 0v14c3-1 6-1 8 0V5Z"/></svg>
+          Education
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="mobile-group-list">
+          <a href="#programs">Coaching</a>
+          <a href="https://practice.waielts.com" target="_blank" rel="noopener">Practice</a>
+          <span class="soon">Masterclass <span class="soon-badge">Coming soon</span></span>
+          <a href="#pricing">Packages</a>
+        </div>
+      </div>
+
+      <div class="mobile-group">
+        <button class="mobile-group-trigger">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>
+          Ecosystem
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="mobile-group-list">
+          <span class="soon">ELE <span class="soon-badge">Coming soon</span></span>
+        </div>
+      </div>
+
+      <a href="#faq"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.4 2.33c-.9.33-1.4 1.02-1.4 1.92v.25"/><circle cx="12" cy="17" r="0.6" fill="currentColor" stroke="none"/></svg>FAQ</a>
+      <a class="btn btn-outline-violet" href="https://www.waieltsacademy.com.au/free-info-session" target="_blank" rel="noopener">Book free info session</a>
     </div>
   </div>
 
@@ -393,6 +505,29 @@
           </div>
           <div class="band-numbers" aria-hidden="true">
             <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block about reveal" id="about">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Why we exist</h2>
+          <p>Not just a coaching provider. A learning ecosystem built around your result.</p>
+        </div>
+        <div class="about-grid">
+          <div class="about-card" id="purpose">
+            <h3>Purpose</h3>
+            <p>To make life-changing international opportunities more accessible by helping people build the English skills and IELTS performance they need to move forward.</p>
+          </div>
+          <div class="about-card" id="vision">
+            <h3>Vision</h3>
+            <p>To become the trusted international learning ecosystem that guides every IELTS student from their current level to the score required for their next life opportunity.</p>
+          </div>
+          <div class="about-card" id="mission">
+            <h3>Mission</h3>
+            <p>We combine expert teaching, structured practice and intelligent feedback to deliver effective, measurable and accessible IELTS learning journeys at international scale.</p>
           </div>
         </div>
       </div>
@@ -670,7 +805,7 @@
       </div>
     </section>
 
-    <section class="block reveal">
+    <section class="block reveal" id="faq">
       <div class="wrap">
         <div class="section-head">
           <h2>Frequently asked questions</h2>
@@ -731,11 +866,12 @@
       <div class="footer-inner">
         <span>© <span id="year"></span> WA IELTS</span>
         <nav aria-label="Footer">
-          <a href="#programs">Programs</a>
+          <a href="#about">About us</a>
           <a href="#team">Team</a>
-          <a href="#pricing">Pricing</a>
+          <a href="#pricing">Packages</a>
           <a href="#reviews">Reviews</a>
           <a href="#ecosystem">Ecosystem</a>
+          <a href="#faq">FAQ</a>
           <a href="https://practice.waielts.com" target="_blank" rel="noopener">Practice app</a>
           <a href="mailto:info@waieltsacademy.com.au">info@waieltsacademy.com.au</a>
         </nav>
@@ -759,25 +895,55 @@
       revealEls.forEach(el => el.classList.add('in'));
     }
 
-    // Scroll-spy nav: track every section's intersection ratio and activate
-    // whichever is currently most visible, instead of reacting to each
-    // intersecting entry independently (which could activate an early
-    // section while the page was still showing the hero above it).
-    const navLinks = document.querySelectorAll('nav.primary a, .mobile-nav-panel a[href^="#"]');
-    const sectionIds = Array.from(document.querySelectorAll('nav.primary a'))
-      .map(a => a.getAttribute('href'))
-      .filter(h => h && h.startsWith('#'));
-    const sections = sectionIds.map(id => document.querySelector(id)).filter(Boolean);
-    if ('IntersectionObserver' in window && sections.length) {
+    // Scroll-spy nav: track every tracked section's intersection ratio and
+    // activate whichever top-level nav entry (a dropdown group or a plain
+    // link) lists the most-visible section under its data-sections list,
+    // instead of reacting to each intersecting entry independently.
+    const spyTargets = Array.from(document.querySelectorAll('nav.primary [data-sections]'));
+    const trackedIds = Array.from(new Set(spyTargets.flatMap(el => el.dataset.sections.split(' '))));
+    const spySections = trackedIds.map(id => document.getElementById(id)).filter(Boolean);
+    function setActiveSpy(bestId) {
+      spyTargets.forEach(el => {
+        const ids = el.dataset.sections.split(' ');
+        const target = el.classList.contains('nav-item') ? el.querySelector('.nav-trigger') : el;
+        target.classList.toggle('active', !!(bestId && ids.includes(bestId)));
+      });
+    }
+    if ('IntersectionObserver' in window && spySections.length) {
       const ratios = new Map();
       const spy = new IntersectionObserver((entries) => {
         entries.forEach(entry => { ratios.set(entry.target.id, entry.isIntersecting ? entry.intersectionRatio : 0); });
         let bestId = null, bestRatio = 0;
         ratios.forEach((ratio, id) => { if (ratio > bestRatio) { bestRatio = ratio; bestId = id; } });
-        navLinks.forEach(l => l.classList.toggle('active', bestId && l.getAttribute('href') === '#' + bestId));
+        setActiveSpy(bestId);
       }, { rootMargin: '-15% 0px -70% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] });
-      sections.forEach(s => spy.observe(s));
+      spySections.forEach(s => spy.observe(s));
     }
+
+    // Desktop dropdown menus (About us / Education / Ecosystem)
+    const navItems = Array.from(document.querySelectorAll('.nav-item'));
+    function closeAllDropdowns() {
+      navItems.forEach(item => {
+        item.classList.remove('open');
+        item.querySelector('.nav-trigger').setAttribute('aria-expanded', 'false');
+      });
+    }
+    navItems.forEach(item => {
+      const trigger = item.querySelector('.nav-trigger');
+      trigger.addEventListener('click', () => {
+        const wasOpen = item.classList.contains('open');
+        closeAllDropdowns();
+        if (!wasOpen) { item.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      });
+      item.querySelectorAll('.nav-dropdown a').forEach(a => a.addEventListener('click', closeAllDropdowns));
+    });
+    document.addEventListener('click', (e) => { if (!e.target.closest('.nav-item')) closeAllDropdowns(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAllDropdowns(); });
+
+    // Mobile nav groups (same 3 dropdown categories, as accordions)
+    document.querySelectorAll('.mobile-group-trigger').forEach(btn => {
+      btn.addEventListener('click', () => btn.closest('.mobile-group').classList.toggle('open'));
+    });
 
     // Mobile nav
     const menuToggle = document.getElementById('menuToggle');
